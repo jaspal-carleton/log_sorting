@@ -1,7 +1,6 @@
 # Log Sorting
-Log sorting - Chronologically sort 'K log sources' where each log has 'N log entries'
 
-<br>
+Log sorting - Chronologically sort 'K log sources' where each log source has 'N log entries'
 
 ## Description
 
@@ -61,6 +60,27 @@ The app requires NodeJS and NPM to be installed on the system where this applica
    ```sh
    npm start
    ```
+
+## Discussion
+
+The given problem is similar to the situation where "K Sorted Arrays" have to be merged. However, there are few unique challenges associated to this problem. Few of which are discussed below.
+
+### Challenges
+    - Here we do not know the size of the Kth array because the input array (actually log source) is not in the form of static file. It is more of a continuous streaming log. As a result of which, we cannot predict the memory storage space requirements for this problem.
+    - Due to the nature of draining the log entries from the input log sources, some of the log sources may get drained early than others. In other words, we cannot predict when the log streaming will stop for which of the log sources. Hence, it is not useful to iterate the entire array of log sources everytime when some of the input sources would have already been drained.
+
+### Approach
+
+Both, synchronous and asynchronous solution make use of Min-Heap data structure to chronologically extract the log entries and print them on the stdout. The high level system diagram is shown below. Both, the solution has time complexity of O(n*k log(k)), where 'k' is the number of log sources and 'n' is number of log entries in each log source.
+
+![System Diagram](docs/log_sorting1.png)
+
+1. Synchronous
+Although, synchronous solution make use of Min-Heap, but it is a custom heap data strucutre where the heap size is efficiently kept constant and is limited to the count 'K' of the log sources. Therefore, it has space complexity of only O(k). Additionally, the synchronous solution make use of combination of Priority Queues along with Min-Heap to efficiently manage the memory space.
+
+1. Asynchronous
+The asynchronous solution is more challenging than the synchronous one. Due to the delay in generation of log entries from a given log source, the Min-Heap has to wait to receive the new node. Although, the adopted solution in not very efficient in terms of space complexity but it is able to achieve the same time complexity as the synchronous solution.
+
 
 ## Test Results
 
@@ -162,3 +182,6 @@ The app requires NodeJS and NPM to be installed on the system where this applica
     Logs/s:			 74784.56851529471
     ***********************************
 
+## Future Enhancements
+
+To make the asynchronous solution more efficient, the event driven publisher-subscriber system can be implemented. Briefly, the asynchronous log sources can be spread across multiple processes to be processed parallely (driver node and worker node pattern) where they publish to an event queue or topic. Once the log entry is placed in the queue or topic it will generate an event. The Min-Heap system would have subscribed to the queue (or topic) and upon receiving an event it can process the payload to create a node and add it to the heap. Simultaneously, printing it to the stdout. Therefore, in this kind of system the publisher and subscriber systems are independent and not tightly integrated, which improves the time-space complexity.
