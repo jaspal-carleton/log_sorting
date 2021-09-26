@@ -1,0 +1,26 @@
+{
+  "name": "log_sorting",
+  "version": "1.0.0",
+  "description": "Log sorting - Chronologically sort K log sources where each log has N log entries",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "./node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaspal-carleton/log_sorting.git"
+  },
+  "author": "Jaspal Singh",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jaspal-carleton/log_sorting/issues"
+  },
+  "homepage": "https://github.com/jaspal-carleton/log_sorting#readme",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "Faker": "~0.7.0",
+    "jest": "^26.6.3",
+    "lodash": "^4.13.1"
+  }
+}
