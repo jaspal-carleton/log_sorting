@@ -10,9 +10,9 @@ We have a number of [**log sources**](https://github.com/jaspal-carleton/log_sor
 1. ***Drain all of the log sources*** for both the synchronous and asynchronous solutions.
     - [Synchronous](https://github.com/jaspal-singh/log_sorting/lib/log-source.js#L37)
     - [Asynchronous](https://github.com/jaspal-singh/log_sorting/lib/log-source.js#L45)
-1. Print all of the entries, across all of the sources, in chronological order.
+2. Print all of the entries, across all of the sources, in chronological order.
     - We don't need to store the log entries, just print them to stdout.
-1. Do this *efficiently*. There are time and space complexities afoot!
+3. Do this *efficiently*. There are time and space complexities afoot!
 
 ## Getting Started
 
@@ -80,7 +80,7 @@ Both, synchronous and asynchronous solution make use of Min-Heap data structure 
 1. Synchronous
 * Although, synchronous solution make use of Min-Heap, but it is a custom heap data strucutre where the heap size is efficiently kept constant and is limited to the count 'K' of the log sources. Therefore, it has space complexity of only O(k). Additionally, the synchronous solution make use of combination of Priority Queues along with Min-Heap to efficiently manage the memory space.
 
-1. Asynchronous
+2. Asynchronous
 * The asynchronous solution is more challenging than the synchronous one. Due to the delay in generation of log entries from a given log source, the Min-Heap has to wait to receive the new node. Although, the adopted solution in not very efficient in terms of space complexity but it is able to achieve the same time complexity as the synchronous solution.
 
 ## Future Enhancements
@@ -138,7 +138,7 @@ Both, synchronous and asynchronous solution make use of Min-Heap data structure 
     Logs/s:			 88402.67415232326
     ***********************************
 
-1. Asynchronous
+2. Asynchronous
     - runSolutions(10)
     ***********************************
     Logs printed:		 2434
